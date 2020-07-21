@@ -59,6 +59,6 @@ class Prompt:
                 repr(i) for i in self.items if repr(i).strip()
             )
             if self.info_location is InfoLocation.ABOVE:
-                prompt_str += "\n "
-        prompt_str += self.prompt_string + " "
+                prompt_str += "\n"
+        prompt_str += f" {self.prompt_string} "
         return prompt_str

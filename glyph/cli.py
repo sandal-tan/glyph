@@ -8,8 +8,7 @@ import logzero
 import yaml
 
 from .prompt import Prompt
-
-LOOK_LOCATIONS = [os.path.expanduser("~/.p.yaml")]
+from . import const
 
 
 def cli():
@@ -17,7 +16,7 @@ def cli():
 
     logzero.loglevel(ERROR)
 
-    for loc in LOOK_LOCATIONS:
+    for loc in const.CONFIG_FILE_LOCATIONS:
         if os.path.exists(loc):
             break
     else:

@@ -1,12 +1,39 @@
 # Glyph - A highly customizable prompt
 
-Example:
+Glyph is a configurable prompt, driven by a YAML file to provide customization. By default, Glyph will display:
+
+1. The current working directory
+2. Git repository status
+3. Python virtualenv name
 
 ```shell
-glyph
-~/development/myapp : master * : myapp-jlmdf0py3.8
+ ~/development/glyph : master * : glyph-H1rWdwPe-py3.8
  %
 ```
+
+Glyph also provides other `Item` to customize your prompt:
+
+1. `ExitCodeItem` - Display the exit code of the previous command
+
+## Customization
+
+In order to customize your prompt, create and edit `~/.glyph.yaml`:
+
+```yaml
+# ~/.glyph.yaml
+info_location: 2 # inline
+prompt_string: '>'
+info_separator: '-'
+items:
+    ExitCodeItem: {}
+    DirItem:
+        expand_user: true
+```
+
+Customization of `glyph` is done using a `YAML` file, to pass arguments to constructors. Top-level options
+in the configuration file are from `Prompt` and the `items` should be a mapping of `Item` to the desired arguments.
+
+## Custom Items
 
 Glyph is customized through `Item`. `Item` are small classes that are responsible for gathering and formatting
 information.

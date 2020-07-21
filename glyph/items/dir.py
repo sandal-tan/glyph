@@ -28,6 +28,12 @@ class DirItem(Item):
     @colorize(Foreground.GREEN)
     def __repr__(self) -> str:
         _repr = self.get()
+
         if not self.expand_user:
             _repr = _repr.replace(str(Path.home()), "~")
+
+        if self.compact:
+            _split = _repr.split("/")
+            _repr = "/".join([i[0] if i else i for i in _split[:-1]] + [_split[-1]])
+
         return _repr
