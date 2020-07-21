@@ -34,7 +34,7 @@ class GitItem(Item):
         if self._repo is not None:
             if self.branch:
                 _repr["branch"] = self._repo.active_branch.name.strip()
-            if self.dirty:
+            if self.dirty and self._repo.is_dirty():
                 _repr["dirty"] = self.dirty_symbol
         return _repr
 
