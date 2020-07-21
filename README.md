@@ -46,6 +46,12 @@ items:
         expand_user: true
 ```
 
+Which results in:
+
+```shell
+ 127 - /U/i/d/glyph >
+```
+
 Customization of `glyph` is done using a `YAML` file, to pass arguments to constructors. Top-level options
 in the configuration file are from `Prompt` and the `items` should be a mapping of `Item` to the desired arguments.
 
