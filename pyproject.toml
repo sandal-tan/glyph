@@ -17,6 +17,7 @@ bandit = "^1.6.2"
 mypy = "^0.782"
 pylint = "^2.5.3"
 black = "^19.10b0"
+MarkdownPP = "^1.5.1"
 
 [tool.poetry.scripts]
 glyph = 'glyph.cli:cli'
