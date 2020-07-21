@@ -1,5 +1,14 @@
 # Glyph - A highly customizable prompt
 
+**Glyph requires Python 3.8+**
+
+To install `glyph`:
+
+```shell
+pip install git+https://github.com/sandal-tan/glyph
+
+```
+
 Glyph is a configurable prompt, driven by a YAML file to provide customization. By default, Glyph will display:
 
 1. The current working directory
@@ -14,6 +23,13 @@ Glyph is a configurable prompt, driven by a YAML file to provide customization. 
 Glyph also provides other `Item` to customize your prompt:
 
 1. `ExitCodeItem` - Display the exit code of the previous command
+
+## Why?
+
+I couldn't find any off-the-shell fish prompts that I liked, and I really didn't like maintaining my own in fish/bash/
+etc. so I wrote a framework to describe what I want simply, and make adding new items to my prompt fairly easy.
+
+The default design is driven from my use-case at work. I copy and paste a lot from the terminal
 
 ## Customization
 
