@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "glyph-weather"
+version = "0.1.0"
+description = "A glyph item to display the current weather"
+authors = ["Ian Baldwin <ian@iantbaldw.in>"]
+packages = [
+    { include = "glyph" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+requests = "^2.24.0"
+glyph = {git = "git@github.com:sandal-tan/glyph.git", branch = "master"}
+logzero = "^1.5.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+bandit = "^1.6.2"
+mypy = "^0.782"
+pylint = "^2.5.3"
+black = "^19.10b0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0a5"]
+build-backend = "poetry.core.masonry.api"
