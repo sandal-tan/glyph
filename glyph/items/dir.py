@@ -2,11 +2,13 @@
 
 import os
 from pathlib import Path
+from dataclasses import dataclass
 
 from ..item import Item
 from ..colors import colorize, Foreground
 
 
+@dataclass
 class DirItem(Item):
     """Get and display the current working directory.
 
@@ -16,9 +18,8 @@ class DirItem(Item):
 
     """
 
-    def __init__(self, expand_user: bool = False, compact: bool = True):
-        self.expand_user = expand_user
-        self.compact = compact
+    expand_user: bool = False
+    compact: bool = True
 
     def get(self) -> str:
         """Get the current working directory."""

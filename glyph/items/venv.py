@@ -4,6 +4,7 @@ from dataclasses import dataclass
 import os
 
 from ..item import Item
+from ..colors import colorize, Foreground
 
 
 @dataclass
@@ -17,6 +18,7 @@ class VenvItem(Item):
             venv_path = ""
         return venv_path
 
+    @colorize(foreground_color=Foreground.BLUE)
     def __repr__(self) -> str:
         _repr = self.get()
         if self.compact:

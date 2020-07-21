@@ -4,11 +4,14 @@ import importlib
 import pkgutil
 import pprint
 import pyclbr
+import pickle
+import os
 
 from logzero import logger
 
 from . import items
 from .item import Item
+from .const import REGISTRY_CACHE_PATH
 
 
 def discover_namespace_plugins(namespace_package):
@@ -49,8 +52,13 @@ def discover_namespace_plugins(namespace_package):
 class Registry:
     """A registry of items."""
 
-    def __init__(self):
+    def __init__(self, cache_path: str = REGISTRY_CACHE_PATH):
         self.items = discover_namespace_plugins(items)
+
+        # Save the registry after init
+        os.makedirs(os.path.dirname(os.path.expanduser(cache_path)), exist_ok=True)
+        with open(os.path.expanduser(cache_path), "wb") as registry_fp:
+            pickle.dump(self, registry_fp)
 
     def __repr__(self):
         return pprint.pformat(self.items)

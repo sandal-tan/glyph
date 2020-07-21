@@ -1,11 +1,13 @@
 """A CLI prompt."""
 
-from dataclasses import dataclass
 import typing as T
 from enum import Enum
+import os
+import pickle
 
 from .item import Item
 from .registry import Registry
+from . import const
 
 
 class InfoLocation(Enum):
@@ -31,12 +33,18 @@ class Prompt:
         prompt_string: str = "%",
         info_separator: str = ":",
         items: T.Optional[T.Dict[str, T.Dict]] = None,
+        registry_cache_path: str = const.REGISTRY_CACHE_PATH,
     ):
         self.info_location = InfoLocation(info_location)
         self.info_separator = info_separator
         self.prompt_string = prompt_string
         self.items: T.List[Item] = []
-        self.registry = Registry()
+
+        if os.path.exists(os.path.expanduser(registry_cache_path)):
+            with open(os.path.expanduser(registry_cache_path), "rb") as registry_fp:
+                self.registry = pickle.load(registry_fp)
+        else:
+            self.registry = Registry()
 
         # Validate
         if items is not None:
@@ -48,7 +56,7 @@ class Prompt:
         if self.info_location is not InfoLocation.OFF:
             # Print Info
             prompt_str += f" {self.info_separator} ".join(
-                repr(i) for i in self.items if repr(i)
+                repr(i) for i in self.items if repr(i).strip()
             )
             if self.info_location is InfoLocation.ABOVE:
                 prompt_str += "\n "

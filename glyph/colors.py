@@ -58,7 +58,10 @@ def colorize(foreground_color: Foreground) -> T.Callable:
 
     def _decorate(func: T.Callable):
         def _call(*args, **kwargs):
-            return foreground_color(func(*args, **kwargs))
+            _return = func(*args, **kwargs)
+            if isinstance(_return, str) and _return:
+                return foreground_color(_return)
+            return _return
 
         return _call
 
