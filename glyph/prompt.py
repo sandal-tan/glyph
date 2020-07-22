@@ -8,6 +8,7 @@ import pickle
 from .item import Item
 from .registry import Registry
 from . import const
+from .items.glyph_error import GlyphErrorItem
 
 
 class InfoLocation(Enum):
@@ -42,14 +43,27 @@ class Prompt:
 
         if os.path.exists(os.path.expanduser(registry_cache_path)):
             with open(os.path.expanduser(registry_cache_path), "rb") as registry_fp:
-                self.registry = pickle.load(registry_fp)
+                try:
+                    self.registry = pickle.load(registry_fp)
+                except ImportError:
+                    # The registry is referring to a plugin that isn't installed
+                    self.registry = Registry()
         else:
             self.registry = Registry()
 
         # Validate
         if items is not None:
             for item, config in items.items():
-                self.items.append(self.registry.get(item)(**config))
+                try:
+                    _item = None
+                    try:
+                        _item = self.registry.get(item)(**config)
+                    except KeyError:
+                        self.registry = Registry()
+                        _item = self.registry.get(item)(**config)
+                    self.items.append(_item)
+                except KeyError:
+                    self.items.append(GlyphErrorItem(f"Failed to load {item}"))
 
     def __repr__(self) -> str:
         prompt_str = " "
