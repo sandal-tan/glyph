@@ -129,7 +129,9 @@ class WeatherItem(Item):
         request_url = f"{BASE_URL}q={self.city_name}"
         if self.state_code is not None:
             assert self.country_code is not None
-            request_url += f",{self.state_code},{self.country_code}"
+            request_url += f",{self.state_code}"
+        if self.country_code is not None:
+            request_url += f",{self.country_code}"
         request_url += f"&appid={self.api_key}&units={self.units.name}"
 
         logger.debug(request_url)
