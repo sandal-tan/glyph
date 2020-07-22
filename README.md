@@ -1,3 +1,4 @@
+<!--- vi: ft=markdown -->
 # Glyph - A highly customizable prompt
 
 **Glyph requires Python 3.8+**
@@ -30,6 +31,9 @@ I couldn't find any off-the-shell fish prompts that I liked, and I really didn't
 etc. so I wrote a framework to describe what I want simply, and make adding new items to my prompt fairly easy.
 
 The default design is driven from my use-case at work. I copy and paste a lot from the terminal
+
+The name: I have trouble coming up with names that aren't acronyms from a description. So I asked a friend. They
+suggested systems responsible for dealing with fish. We stubmled upon "Great Lake Fish Fence" -> "glff" -> "glyph".
 
 ## Customization
 
@@ -147,6 +151,13 @@ class WeatherItem(Item):
         _resp = self.get()
         return " ".join(_resp.values())
 
+```
+
+When included an a prompt:
+
+```shell
+ ~/development/glyph : master * : 82º Clouds
+ % 
 ```
 
 # Integration
