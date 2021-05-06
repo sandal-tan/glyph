@@ -33,7 +33,12 @@ class GitItem(Item):
         _repr = {}
         if self._repo is not None:
             if self.branch:
-                _repr["branch"] = self._repo.active_branch.name.strip()
+                try:
+                    _repr["branch"] = self._repo.active_branch.name.strip()
+                except TypeError as err:
+                    msg = str(err)
+                    hash_ = msg.split()[-1]
+                    _repr["branch"] = f'{hash_[1:9]}...'
             if self.dirty and self._repo.is_dirty():
                 _repr["dirty"] = self.dirty_symbol
         return _repr
